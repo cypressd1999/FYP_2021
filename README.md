@@ -147,3 +147,5 @@ Without MTB pre-training: F1 results when trained on 100 % training data:
 - inference & results on benchmarks (SemEval2010 Task 8) with MTB pre-training
 - felrel task
 
+## Source:
+https://github.com/plkmo/BERT-Relation-Extraction
