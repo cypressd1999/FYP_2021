@@ -175,6 +175,8 @@ def train_and_fit(args):
         
         scheduler.step()
         results = evaluate_results(net, test_loader, pad_id, cuda)
+        # debut
+        print(results)
         losses_per_epoch.append(sum(losses_per_batch)/len(losses_per_batch))
         accuracy_per_epoch.append(sum(accuracy_per_batch)/len(accuracy_per_batch))
         test_f1_per_epoch.append(results['f1'])
