@@ -100,7 +100,7 @@ def evaluate_results(net, test_loader, pad_id, cuda):
     # debug 
     print("debug:-----------------------------------")
     print(true_labels)
-    print(out_lables)
+    print(out_labels)
     print("-----------------------------------\n\n")
     
     results = {
