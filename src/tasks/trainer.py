@@ -13,6 +13,11 @@ from torch.nn.utils import clip_grad_norm_
 from .preprocessing_funcs import load_dataloaders
 from .train_funcs import load_state, load_results, evaluate_, evaluate_results
 from ..misc import save_as_pickle, load_pickle
+
+#solve the X display issue
+import matplotlib as mpl
+mpl.use('Agg')
+
 import matplotlib.pyplot as plt
 import time
 import logging
