@@ -34,8 +34,8 @@ def process_text(text, mode='train'):
         # check entries
         if mode == 'train':
             assert int(re.match("^\d+", sent)[0]) == (i + 1)
-        else:
-            assert (int(re.match("^\d+", sent)[0]) - 2348) == (i + 1)
+#         else:
+#             assert (int(re.match("^\d+", sent)[0]) - 2348) == (i + 1)
         assert re.match("^Comment", comment)
         assert len(blank) == 1
         
