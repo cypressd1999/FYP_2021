@@ -112,13 +112,13 @@ def evaluate_results(net, test_loader, pad_id, cuda):
           acc_by_category[label] += 1
     for label in acc_by_category.keys():
       acc_by_category[label] = acc_by_category[label] / count_by_category[label]
-    print(acc_by_category)
     
     results = {
         "accuracy": accuracy,
         "precision": precision_score(true_labels, out_labels),
         "recall": recall_score(true_labels, out_labels),
-        "f1": f1_score(true_labels, out_labels)
+        "f1": f1_score(true_labels, out_labels),
+        "accuracy_by_category": acc_by_category
     }
     logger.info("***** Eval results *****")
     for key in sorted(results.keys()):
