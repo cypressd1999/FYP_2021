@@ -93,7 +93,8 @@ def evaluate_results(net, test_loader, pad_id, cuda):
                           e1_e2_start=e1_e2_start)
             
             accuracy, (o, l) = evaluate_(classification_logits, labels, ignore_idx=-1)
-            out_labels.append([str(i) for i in o]); true_labels.append([str(i) for i in l])
+#             out_labels.append([str(i) for i in o]); true_labels.append([str(i) for i in l])
+            out_labels+=[str(i) for i in o]; true_labels+=[str(i) for i in l]
             acc += accuracy
     
     accuracy = acc/(i + 1)
