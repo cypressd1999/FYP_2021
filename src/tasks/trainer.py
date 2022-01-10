@@ -228,8 +228,9 @@ def train_and_fit(args):
     print("\nTest Accuracy: ", end = "")
     print(test_acc_per_epoch)
     rm = load_pickle("relations.pkl")
+    print(test_acc_by_cat_per_epoch[-1])
     for label in test_acc_by_cat_per_epoch[-1].keys():
-      relation = rm.idx2rel[label].strip()
+      relation = rm.idx2rel[int(label)].strip()
       print(relation, end = " ")
       print(test_acc_by_cat_per_epoch[-1][label])
     
