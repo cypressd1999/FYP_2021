@@ -236,7 +236,7 @@ def train_and_fit(args):
     for label in test_acc_by_cat_per_epoch[-1].keys():
       relation = rm.idx2rel[int(label)].strip()
       relation = relation.replace("(e1,e2)", "")
-      print(" ",end = "")
+      print("   ",end = "")
       print(relation, end = ": ")
       print(test_acc_by_cat_per_epoch[-1][label])
     print("\n--------------------------------------------------------------\n")
