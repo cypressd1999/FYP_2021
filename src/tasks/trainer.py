@@ -183,10 +183,16 @@ def train_and_fit(args):
         losses_per_epoch.append(sum(losses_per_batch)/len(losses_per_batch))
         accuracy_per_epoch.append(sum(accuracy_per_batch)/len(accuracy_per_batch))
         test_f1_per_epoch.append(results['f1'])
+        
+        # add for print testing accuracy and acc_by_category
+        test_acc_per_epoch.append(results['accuracy'])
+        test_acc_by_cat_per_epoch.append(results['accuracy_by_category'])
+        
         print("Epoch finished, took %.2f seconds." % (time.time() - start_time))
         print("Losses at Epoch %d: %.7f" % (epoch + 1, losses_per_epoch[-1]))
         print("Train accuracy at Epoch %d: %.7f" % (epoch + 1, accuracy_per_epoch[-1]))
         print("Test f1 at Epoch %d: %.7f" % (epoch + 1, test_f1_per_epoch[-1]))
+        print("Test accuracy at Epoch %d: %.7f" % (epoch + 1, test_acc_per_epoch[-1])) # add for testing accuracy
         
         if accuracy_per_epoch[-1] > best_pred:
             best_pred = accuracy_per_epoch[-1]
