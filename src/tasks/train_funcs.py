@@ -93,23 +93,26 @@ def evaluate_results(net, test_loader, pad_id, cuda):
                           e1_e2_start=e1_e2_start)
             
             accuracy, (o, l) = evaluate_(classification_logits, labels, ignore_idx=-1)
-#             out_labels.append([str(i) for i in o]); true_labels.append([str(i) for i in l])
-            # for debug
-            out_labels+=[str(i) for i in o]; true_labels+=[str(i) for i in l]
-            out_labels = [out_labels]
-            true_labels = [true_labels]
-  
+            out_labels.append([str(i) for i in o]); true_labels.append([str(i) for i in l])
             acc += accuracy
     
     accuracy = acc/(i + 1)
-
-    # for debug
-    print("true_labels: ")
-    print(true_labels)
-    print("\n")
-    print("out_labels:")
-    print(out_labels)
-        
+    
+    # calculate accuracy by category
+    acc_by_category = dict()
+    count_by_category = dict()
+    for i, labels in emurate(out_labels):
+      for j, label in emurate(labels):
+        if label not in acc_by_category.keys():
+          # initialize for new label
+          acc_by_category[label] = 0
+          count_by_category[label] = 0
+        count_by_category[label] += 1
+        if label == true_labels[i][j]:
+          acc_by_vategory[label] += 1
+    for label in acc_by_category.keys():
+      acc_by_category[label] = acc_by_category[label] / count_by_category[label]
+    print(acc_by_category)
     
     results = {
         "accuracy": accuracy,
