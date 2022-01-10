@@ -98,6 +98,12 @@ def evaluate_results(net, test_loader, pad_id, cuda):
     
     accuracy = acc/(i + 1)
 
+    # for debug
+    print("true_labels: ")
+    print(true_labels)
+    print("\n")
+    print("out_labels:")
+    print(out_labels)
     
     results = {
         "accuracy": accuracy,
