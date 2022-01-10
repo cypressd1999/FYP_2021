@@ -126,6 +126,10 @@ def train_and_fit(args):
     
     losses_per_epoch, accuracy_per_epoch, test_f1_per_epoch = load_results(args.model_no)
     
+    # don't support half traning!
+    test_acc_per_epoch = []
+    test_acc_by_cat_per_epoch = []
+    
     logger.info("Starting training process...")
     pad_id = tokenizer.pad_token_id
     mask_id = tokenizer.mask_token_id
@@ -219,6 +223,16 @@ def train_and_fit(args):
                 }, os.path.join("./data/" , "task_test_checkpoint_%d.pth.tar" % args.model_no))
     
     logger.info("Finished Training!")
+    
+    # Print out the testing result
+    print("\nTest Accuracy: ", end = "")
+    print(test_acc_per_epoch)
+    rm = load_pickle("relations.pkl")
+    for label in test_acc_by_cat_per_epoch[-1].keys():
+      relation = rm.idx2rel[label].strip()
+      print(relation, end = " ")
+      print(test_acc_by_cat_per_epoch[-1][label])
+    
     fig = plt.figure(figsize=(20,20))
     ax = fig.add_subplot(111)
     ax.scatter([e for e in range(len(losses_per_epoch))], losses_per_epoch)
