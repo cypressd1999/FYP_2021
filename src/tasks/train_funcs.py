@@ -109,7 +109,7 @@ def evaluate_results(net, test_loader, pad_id, cuda):
           count_by_category[label] = 0
         count_by_category[label] += 1
         if label == true_labels[i][j]:
-          acc_by_vategory[label] += 1
+          acc_by_category[label] += 1
     for label in acc_by_category.keys():
       acc_by_category[label] = acc_by_category[label] / count_by_category[label]
     print(acc_by_category)
