@@ -101,8 +101,8 @@ def evaluate_results(net, test_loader, pad_id, cuda):
     # calculate accuracy by category
     acc_by_category = dict()
     count_by_category = dict()
-    for i, labels in emurate(out_labels):
-      for j, label in emurate(labels):
+    for i, labels in enumerate(out_labels):
+      for j, label in enumerate(labels):
         if label not in acc_by_category.keys():
           # initialize for new label
           acc_by_category[label] = 0
