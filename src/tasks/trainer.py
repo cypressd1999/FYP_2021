@@ -225,17 +225,19 @@ def train_and_fit(args):
     logger.info("Finished Training!")
     
     # Print out the testing result
-    print("\nTrain Loss: ", end = "")
+    print("\nTrain Loss = ", end = "")
     print(losses_per_epoch)
-    print("\nTrain Accuracy: ", end = "")
+    print("Train Accuracy = ", end = "")
     print(accuracy_per_epoch)
-    print("\nTest Accuracy: ", end = "")
+    print("Test Accuracy = ", end = "")
     print(test_acc_per_epoch)
+    print("Test Accuracy by Category: ")
     rm = load_pickle("relations.pkl")
     for label in test_acc_by_cat_per_epoch[-1].keys():
       relation = rm.idx2rel[int(label)].strip()
-      relation = relation.replace("(e1,e2)", ":")
-      print(relation, end = " ")
+      relation = relation.replace("(e1,e2)", "")
+      print(" ",end = "")
+      print(relation, end = ": ")
       print(test_acc_by_cat_per_epoch[-1][label])
     print("\n--------------------------------------------------------------\n")
     
