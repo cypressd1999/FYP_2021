@@ -239,6 +239,13 @@ def train_and_fit(args):
       print("   ",end = "")
       print(relation, end = ": ")
       print(test_acc_by_cat_per_epoch[-1][label])
+      
+    # for presentation only
+    print()
+    print(test_acc_by_cat_per_epoch)
+    print()
+    # for presentation
+    
     print("\n--------------------------------------------------------------\n")
     
     fig = plt.figure(figsize=(20,20))
