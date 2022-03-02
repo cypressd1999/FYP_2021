@@ -27,14 +27,14 @@ def read_input(path, max_length=5000):
     
     #text = text[:1500] # restrict size for testing
     text = process_textlines(text)
-    print(text)
+    print(type(text))
     print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
 
     print("Length of text (characters): %d" % len(text))
     num_chunks = math.ceil(len(text)/max_length)
     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
-    print(text_chunks)
+    print(type(text_chunks))
     print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
 
     D = []
