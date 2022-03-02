@@ -36,7 +36,9 @@ def read_input(path, max_length=5000):
     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
     print(type(text_chunks))
     print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
-
+    
+    return 0
+    
     D = []
     print("Loading Spacy NLP...")
     nlp = spacy.load("en_core_web_lg")
