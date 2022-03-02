@@ -47,10 +47,12 @@ def read_input(path, max_length=5000):
         entity1 = result[1]
         entity2 = result[2]
         sentence = " ".join(sentence)
+        print(entity1)
+        print(entity2)
         sentence.replace(entity1, "[E1] ",1)
         sentence.replace(entity2, "[E2] ",1)
         sentences.append(sentence)
-    print(sentences) 
+#     print(sentences) 
   
 if __name__ == '__main__':
     path = 'input.txt'
