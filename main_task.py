@@ -75,7 +75,7 @@ if __name__ == "__main__":
           for sentence in sentences:
             result = inferer.infer_sentence(sentence, detect_entities=False)
             print(result)
-            return 0
+            exit()
           
     
     if args.task == 'fewrel':
