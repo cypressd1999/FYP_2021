@@ -44,10 +44,10 @@ def read_input(path, max_length=5000):
     sentences = []
     for result in D:
         sentence = result[0][0]
-        entity1 = result[1]
-        entity2 = result[2]
+        p1 = result[0][1]
+        p2 = result[0][2]
+        sentence = sentence[:p1[0]] + ['[E1] '] + sentence[p1[0]:p1[1]] + [' [/E1]'] + sentence[p1[1]:p2[0]] + ['[E2] '] + sentence[p2[0]:p2[1]] + [' [/E2]'] + sentence[p2[1]:] 
         sentence = " ".join(sentence)
-        sentence = sentence.replace(entity1, "[E1] "+entity1+" [/E1]",1).replace(entity2, "[E2] "+entity2+" [/E2]",1)
         sentences.append(sentence)
     print(sentences) 
   
