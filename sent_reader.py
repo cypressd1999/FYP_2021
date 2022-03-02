@@ -37,7 +37,7 @@ def read_input(path, max_length=5000):
     print("Loading Spacy NLP...")
     nlp = spacy.load("en_core_web_lg")
 
-    for text_chunk in tqdm(text_chunks, total=num_chunks):
+    for text_chunk in tqdm(text_chunks, total=len(text)):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
     print(D)
   
