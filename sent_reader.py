@@ -17,15 +17,15 @@ import logging
 from src.preprocessing_funcs import process_textlines
 from src.preprocessing_funcs import create_pretraining_corpus
 
-def read_input(path):
+def read_input(path, max_length=5000):
     '''
     Input: Path to the input file
     Output: annotated sentences: [E1][/E1], [E2][/E2]
     '''
-    max_length = 50
     with open(path, "r", encoding="utf8") as f:
             text = f.readlines()
-        
+    print(text)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
     #text = text[:1500] # restrict size for testing
     text = process_textlines(text)
 
