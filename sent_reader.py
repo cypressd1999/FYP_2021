@@ -41,4 +41,6 @@ def read_input(path):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
     print(D)
   
- 
+ if __name__ == '__main__':
+        path = 'input.txt'
+        read_input(path)
