@@ -26,7 +26,7 @@ def read_input(path, max_length=5000):
             text = f.readlines()
 
 #     text = process_textlines(text)
-#     print("Length of text (characters): %d" % len(text))
+    print("Number of paragraph: %d" % len(text))
 #     num_chunks = math.ceil(len(text)/max_length)
 #     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
 #     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
@@ -48,7 +48,7 @@ def read_input(path, max_length=5000):
         sentence = " ".join(sentence)
         if sentence.find("[E1]") !=-1: # assert every sentence are annotated
             sentences.append(sentence)
-    print(sentences) 
+    print("Number of sentences with annotation: %d" % len(sentences))
   
 if __name__ == '__main__':
     path = 'input.txt'
