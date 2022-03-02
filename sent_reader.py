@@ -31,7 +31,7 @@ def read_input(path, max_length=5000):
 #     num_chunks = math.ceil(len(text)/max_length)
 #     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
 #     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
-    text_chunks = (text[i] for i in rage(len(text)))
+    text_chunks = (text[i] for i in range(len(text)))
     
     D = []
     print("Loading Spacy NLP...")
