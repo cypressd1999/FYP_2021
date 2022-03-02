@@ -39,14 +39,16 @@ def read_input(path, max_length=5000):
     for text_chunk in tqdm(text_chunks, total=len(text)):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
     
+    print(D)
+    
     sentences = []
     for result in D:
         sentence = result[0][0]
         entity1 = result[1]
         entity2 = result[2]
         sentence = " ".join(sentence)
-        sentence.replace(entity1, "[E1] "+entity1+" [/E1]",1)
-        sentence.replace(entity2, "[E2] "+entity2+" [/E2]",1)
+        sentence.replace(entity1, "[E1] ",1)
+        sentence.replace(entity2, "[E2] ",1)
         sentences.append(sentence)
     print(sentences) 
   
