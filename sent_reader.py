@@ -28,13 +28,13 @@ def read_input(path):
     #text = text[:1500] # restrict size for testing
     text = process_textlines(text)
 
-    logger.info("Length of text (characters): %d" % len(text))
+    print("Length of text (characters): %d" % len(text))
     num_chunks = math.ceil(len(text)/max_length)
-    logger.info("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
+    print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
 
     D = []
-    logger.info("Loading Spacy NLP...")
+    print("Loading Spacy NLP...")
     nlp = spacy.load("en_core_web_lg")
 
     for text_chunk in tqdm(text_chunks, total=num_chunks):
