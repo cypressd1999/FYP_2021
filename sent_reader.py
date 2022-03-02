@@ -47,13 +47,7 @@ def read_input(path, max_length=5000):
         entity1 = result[1]
         entity2 = result[2]
         sentence = " ".join(sentence)
-        print(sentence)
-        print(entity1)
-        print(entity2)
-        print(sentence.find(entity1))
-        return 0
-        sentence.replace(entity1, "[E1] ",1)
-        sentence.replace(entity2, "[E2] ",1)
+        sentence = sentence.replace(entity1, "[E1] "+entity1+" [/E1]",1).replace(entity2, "[E2] "+entity2+" [/E2]",1)
         sentences.append(sentence)
 #     print(sentences) 
   
