@@ -207,7 +207,9 @@ class infer_from_trained(object):
             predicted = torch.softmax(classification_logits, dim=1).max(1)[1].item()
         print("Sentence: ", sentence)
         print("Predicted: ", self.rm.idx2rel[predicted].strip(), '\n')
-        return predicted
+#         return predicted
+        return tuple((sentence, self.rm.idx2rel[predicted].strip())) # added by David for easier output analysis
+
     
     def infer_sentence(self, sentence, detect_entities=False):
         if detect_entities:
