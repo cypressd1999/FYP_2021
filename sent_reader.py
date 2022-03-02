@@ -22,7 +22,7 @@ def read_input(path):
     Input: Path to the input file
     Output: annotated sentences: [E1][/E1], [E2][/E2]
     '''
-    with open(args.pretrain_data, "r", encoding="utf8") as f:
+    with open(path, "r", encoding="utf8") as f:
             text = f.readlines()
         
     #text = text[:1500] # restrict size for testing
