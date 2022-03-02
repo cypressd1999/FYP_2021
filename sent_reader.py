@@ -24,20 +24,14 @@ def read_input(path, max_length=5000):
     '''
     with open(path, "r", encoding="utf8") as f:
             text = f.readlines()
-    
-    #text = text[:1500] # restrict size for testing
-    text = process_textlines(text)
-    print(type(text))
-    print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
 
-    print("Length of text (characters): %d" % len(text))
-    num_chunks = math.ceil(len(text)/max_length)
-    print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
-    text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
-    print(type(text_chunks))
-    print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
-    
-    return 0
+#     text = process_textlines(text)
+
+#     print("Length of text (characters): %d" % len(text))
+#     num_chunks = math.ceil(len(text)/max_length)
+#     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
+#     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
+    text_chunks = (text[i] for i in rage(len(text)))
     
     D = []
     print("Loading Spacy NLP...")
