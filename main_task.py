@@ -74,6 +74,7 @@ if __name__ == "__main__":
           sentences = read_input(path)
           for sentence in sentences:
             result = inferer.infer_sentence(sentence, detect_entities=False)
+            print(type(result))
             print(result)
             exit()
           
