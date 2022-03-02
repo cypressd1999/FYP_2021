@@ -27,6 +27,8 @@ def read_input(path, max_length=5000):
     
     #text = text[:1500] # restrict size for testing
     text = process_textlines(text)
+    print(text)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>\n\n")
 
     print("Length of text (characters): %d" % len(text))
     num_chunks = math.ceil(len(text)/max_length)
