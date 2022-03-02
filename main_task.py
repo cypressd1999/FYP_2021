@@ -63,7 +63,7 @@ if __name__ == "__main__":
         test2 = "After eating the chicken, he developed a sore throat the next morning."
         inferer.infer_sentence(test2, detect_entities=True)
         
-        if not from_file:
+        if not args.from_file:
           while True:
               sent = input("Type input sentence ('quit' or 'exit' to terminate):\n")
               if sent.lower() in ['quit', 'exit']:
