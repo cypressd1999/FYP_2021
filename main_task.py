@@ -9,6 +9,8 @@ from src.tasks.trainer import train_and_fit
 from src.tasks.infer import infer_from_trained, FewRel
 import logging
 from argparse import ArgumentParser
+# for reading input
+from sent_reader import read_input
 
 '''
 This fine-tunes the BERT model on SemEval, FewRel tasks
@@ -47,6 +49,7 @@ if __name__ == "__main__":
                                                                                     For BioBERT: 'bert-base-uncased' (biobert_v1.1_pubmed)")
     parser.add_argument("--train", type=int, default=1, help="0: Don't train, 1: train")
     parser.add_argument("--infer", type=int, default=1, help="0: Don't infer, 1: Infer")
+    parser.add_argument("--from_file", type=int, default=0, help="0: Read input from command line, 1: Read input from file")
     
     args = parser.parse_args()
     
@@ -60,11 +63,20 @@ if __name__ == "__main__":
         test2 = "After eating the chicken, he developed a sore throat the next morning."
         inferer.infer_sentence(test2, detect_entities=True)
         
-        while True:
-            sent = input("Type input sentence ('quit' or 'exit' to terminate):\n")
-            if sent.lower() in ['quit', 'exit']:
-                break
-            inferer.infer_sentence(sent, detect_entities=False)
+        if !from_file:
+          while True:
+              sent = input("Type input sentence ('quit' or 'exit' to terminate):\n")
+              if sent.lower() in ['quit', 'exit']:
+                  break
+              inferer.infer_sentence(sent, detect_entities=False)
+        else:
+          path = 'input.txt'
+          sentences = read_input(path)
+          for sentence in sentences:
+            result = inferer.infer_sentence(sentence, detect_entities=False)
+            print(result)
+            return 0
+          
     
     if args.task == 'fewrel':
         fewrel = FewRel(args)
