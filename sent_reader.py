@@ -22,7 +22,7 @@ def read_input(path):
     Input: Path to the input file
     Output: annotated sentences: [E1][/E1], [E2][/E2]
     '''
-    max_length = 5000
+    max_length = 50
     with open(path, "r", encoding="utf8") as f:
             text = f.readlines()
         
