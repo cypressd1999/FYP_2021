@@ -49,7 +49,7 @@ def read_input(path, max_length=5000):
         sentence = " ".join(sentence)
         sentence = sentence.replace(entity1, "[E1] "+entity1+" [/E1]",1).replace(entity2, "[E2] "+entity2+" [/E2]",1)
         sentences.append(sentence)
-#     print(sentences) 
+    print(sentences) 
   
 if __name__ == '__main__':
     path = 'input.txt'
