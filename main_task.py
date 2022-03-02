@@ -75,6 +75,8 @@ if __name__ == "__main__":
           sentences = read_input(path)
           for sentence in sentences:
             result = inferer.infer_sentence(sentence, detect_entities=False) # return a tuple (sentence, predicted relation)
+            if result[1] == 'Other':
+              continue
             sent = result[0]
             E1 = sent[sent.find('[E1] ')+5:sent.find(' [/E1]')]
             E2 = sent[sent.find('[E2] ')+5:sent.find(' [/E2]')]
