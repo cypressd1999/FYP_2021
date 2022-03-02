@@ -81,9 +81,10 @@ if __name__ == "__main__":
             E1 = sent[sent.find('[E1] ')+5:sent.find(' [/E1]')]
             E2 = sent[sent.find('[E2] ')+5:sent.find(' [/E2]')]
             results.append(tuple((E1, E2, result[1])))
-        print(results)    
+        print("Relations extracted:")
+        print(results)
+        print("")
             
-    
     if args.task == 'fewrel':
         fewrel = FewRel(args)
         meta_input, e1_e2_start, meta_labels, outputs = fewrel.evaluate()
