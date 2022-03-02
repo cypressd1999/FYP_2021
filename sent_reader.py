@@ -48,9 +48,11 @@ def read_input(path, max_length=5000):
         sentence = " ".join(sentence)
         if sentence.find("[E1]") !=-1: # assert every sentence are annotated
             sentences.append(sentence)
+    print("\nFinished annotating!")        
     print("Number of sentences with annotation: %d" % len(sentences))
     print("Sentences:")
     print(sentences)
+    print("")
   
 if __name__ == '__main__':
     path = 'input.txt'
