@@ -70,13 +70,19 @@ if __name__ == "__main__":
                   break
               inferer.infer_sentence(sent, detect_entities=False)
         else:
+          results = []
           path = 'input.txt'
           sentences = read_input(path)
           for sentence in sentences:
             result = inferer.infer_sentence(sentence, detect_entities=False)
-            print(type(result))
-            print(result)
+            sent = result[0]
+            E1 = sent[sent.find('[E1] ')+5:sent.find('[/E1] ')]
+            E2 = sent[sent.find('[E2] ')+5:sent.find('[/E2] ')]
+            results.append(tuple((E1, E2, result[1])))
+            print(results)
             exit()
+            
+            
           
     
     if args.task == 'fewrel':
