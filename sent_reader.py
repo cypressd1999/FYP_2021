@@ -53,6 +53,7 @@ def read_input(path, max_length=5000):
     print("Sentences:")
     print(sentences)
     print("")
+    return sentences
   
 if __name__ == '__main__':
     path = 'input.txt'
