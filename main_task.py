@@ -74,7 +74,7 @@ if __name__ == "__main__":
           path = 'input.txt'
           sentences = read_input(path)
           for sentence in sentences:
-            result = inferer.infer_sentence(sentence, detect_entities=False)
+            result = inferer.infer_sentence(sentence, detect_entities=False) # return a tuple (sentence, predicted relation)
             sent = result[0]
             E1 = sent[sent.find('[E1] ')+5:sent.find(' [/E1]')]
             E2 = sent[sent.find('[E2] ')+5:sent.find(' [/E2]')]
