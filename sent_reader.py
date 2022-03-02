@@ -50,8 +50,8 @@ def read_input(path, max_length=5000):
             sentences.append(sentence)
     print("\nFinished annotating!")        
     print("Number of sentences with annotation: %d" % len(sentences))
-    print("Sentences:")
-    print(sentences)
+#     print("Sentences:")
+#     print(sentences)
     print("")
     return sentences
   
