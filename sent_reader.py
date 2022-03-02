@@ -26,7 +26,6 @@ def read_input(path, max_length=5000):
             text = f.readlines()
 
 #     text = process_textlines(text)
-
 #     print("Length of text (characters): %d" % len(text))
 #     num_chunks = math.ceil(len(text)/max_length)
 #     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
@@ -39,7 +38,17 @@ def read_input(path, max_length=5000):
 
     for text_chunk in tqdm(text_chunks, total=len(text)):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
-    print(D)
+    
+    sentences = []
+    for result in D:
+        sentence = result[0][0]
+        entity1 = result[1]
+        entity2 = result[2]
+        sentence = " ".join(sentence)
+        sentence.replace(entity1, "[E1] "+entity1+" [/E1]",1)
+        sentence.replace(entity2, "[E2] "+entity2+" [/E2]",1)
+        sentences.append(sentence)
+    print(sentences) 
   
 if __name__ == '__main__':
     path = 'input.txt'
