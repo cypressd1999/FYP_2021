@@ -39,8 +39,6 @@ def read_input(path, max_length=5000):
     for text_chunk in tqdm(text_chunks, total=len(text)):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
     
-    print(D)
-    
     sentences = []
     for result in D:
         sentence = result[0][0]
@@ -48,7 +46,8 @@ def read_input(path, max_length=5000):
         p2 = result[0][2]
         sentence = sentence[:p1[0]] + ['[E1] '] + sentence[p1[0]:p1[1]] + [' [/E1]'] + sentence[p1[1]:p2[0]] + ['[E2] '] + sentence[p2[0]:p2[1]] + [' [/E2]'] + sentence[p2[1]:] 
         sentence = " ".join(sentence)
-        sentences.append(sentence)
+        if sentence.find("[E1]") !=-1: # assert every sentence are annotated
+            sentences.append(sentence)
     print(sentences) 
   
 if __name__ == '__main__':
