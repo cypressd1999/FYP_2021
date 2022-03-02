@@ -76,8 +76,8 @@ if __name__ == "__main__":
           for sentence in sentences:
             result = inferer.infer_sentence(sentence, detect_entities=False)
             sent = result[0]
-            E1 = sent[sent.find('[E1] ')+5:sent.find('[/E1] ')]
-            E2 = sent[sent.find('[E2] ')+5:sent.find('[/E2] ')]
+            E1 = sent[sent.find('[E1] ')+5:sent.find(' [/E1]')]
+            E2 = sent[sent.find('[E2] ')+5:sent.find(' [/E2]')]
             results.append(tuple((E1, E2, result[1])))
             print(results)
             exit()
