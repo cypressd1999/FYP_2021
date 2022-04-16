@@ -65,12 +65,12 @@ if __name__ == "__main__":
         inferer.infer_sentence(test2, detect_entities=True)
         
         if not args.from_file:
-          detect_entities = bool(args.detect)
+          detect = bool(args.detect)
           while True:
               sent = input("Type input sentence ('quit' or 'exit' to terminate):\n")
               if sent.lower() in ['quit', 'exit']:
                   break
-              inferer.infer_sentence(sent, detect_entities)
+              inferer.infer_sentence(sent, detect_entities=detect)
         else:
           results = []
           path = 'input.txt'
