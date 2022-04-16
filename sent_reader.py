@@ -27,12 +27,16 @@ def read_input(path, max_length=5000):
 
 #     text = process_textlines(text)
     print("Number of paragraph: %d" % len(text))
+    
+    # to store the sentences split by "."
     paragraphs = []
     for line in text:
         paragraphs += line.split(".")
+        
 #     num_chunks = math.ceil(len(text)/max_length)
 #     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
 #     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
+
     text_chunks = (text[i] for i in range(len(text)))
     
     D = []
