@@ -69,7 +69,7 @@ if __name__ == "__main__":
               sent = input("Type input sentence ('quit' or 'exit' to terminate):\n")
               if sent.lower() in ['quit', 'exit']:
                   break
-              inferer.infer_sentence(sent, detect_entities=False)
+              inferer.infer_sentence(sent, detect_entities)
         else:
           results = []
           path = 'input.txt'
