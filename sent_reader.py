@@ -71,7 +71,7 @@ def read_input(path, max_length=5000):
         for e2 in entities:
             if e1 != e2:
                 for sent in paragraphs:
-                    if e1 in sent and e2 in sent:
+                    if e1 in sent and e2 in sent and e1 not in e2 and e2 not in e1:
                         s = sent
                         s = s.replace(e1, '[E1] ' + e1 + ' [/E1]', 1).replace(e2, '[E2] '+e2+' [/E2]', 1)
                         if s.find("E1")!=-1 and s.find("E2")!=-1:
