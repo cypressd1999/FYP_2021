@@ -75,6 +75,7 @@ if __name__ == "__main__":
           results = []
           path = 'input.txt'
           sentences = read_input(path)
+          print(sentences)
           for sentence in sentences:
             result = inferer.infer_sentence(sentence, detect_entities=False) # return a tuple (sentence, predicted relation)
             if result[1] == 'Other':
