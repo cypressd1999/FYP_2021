@@ -50,7 +50,7 @@ if __name__ == "__main__":
     parser.add_argument("--train", type=int, default=1, help="0: Don't train, 1: train")
     parser.add_argument("--infer", type=int, default=1, help="0: Don't infer, 1: Infer")
     parser.add_argument("--from_file", type=int, default=0, help="0: Read input from command line, 1: Read input from file")
-    parser.add_argument("--detect_entities", type=int, default=0, help="Detect entities from input sentences.")
+    parser.add_argument("--detect", type=int, default=0, help="Detect entities from input sentences.")
     
     args = parser.parse_args()
     
@@ -65,6 +65,7 @@ if __name__ == "__main__":
         inferer.infer_sentence(test2, detect_entities=True)
         
         if not args.from_file:
+          detect_entities = bool(args.detect)
           while True:
               sent = input("Type input sentence ('quit' or 'exit' to terminate):\n")
               if sent.lower() in ['quit', 'exit']:
