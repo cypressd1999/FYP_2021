@@ -60,10 +60,14 @@ def read_input(path, max_length=5000):
         e2 = result[2]
         for sent in paragraphs:
             if e1 in sent and e2 in sent:
-                s = sent
-                s = s.replace(e1, '[E1]' + e1 + '[/E1]', 1).replace(e2, '[E2]'+e2+'[/E2]', 1)
-                if s.find("E1")!=-1 and s.find("E2")!=-1:
-                    sentences.append(s)
+                s1 = sent
+                s1 = s1.replace(e1, '[E1]' + e1 + '[/E1]', 1).replace(e2, '[E2]'+e2+'[/E2]', 1)
+                if s1.find("E1")!=-1 and s1.find("E2")!=-1:
+                    sentences.append(s1)
+                s2 = sent
+                s2 = s2.replace(e1, '[E2]' + e1 + '[/E2]', 1).replace(e2, '[E1]'+e2+'[/E1]', 1)
+                if s2.find("E1")!=-1 and s2.find("E2")!=-1:
+                    sentences.append(s2)
                 
     print("\nFinished annotating!")        
     print("Number of sentences with annotation: %d" % len(sentences))
