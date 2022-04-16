@@ -62,8 +62,10 @@ def read_input(path, max_length=5000):
         
         e1 = result[1].strip()
         e2 = result[2].strip()
-        entities.append(e1)
-        entities.append(e2)
+        if e1 not in entities:
+            entities.append(e1)
+        if e2 not in entities:
+            entities.append(e2)
         
     for e1 in entities:
         for e2 in entities:
