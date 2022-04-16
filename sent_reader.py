@@ -28,10 +28,9 @@ def read_input(path, max_length=5000):
 #     text = process_textlines(text)
     print("Number of paragraph: %d" % len(text))
     
-    # to store the sentences split by "."
-    paragraphs = []
-    for line in text:
-        paragraphs += line.split(".")
+    
+    paragraphs = text
+    entities = []
         
 #     num_chunks = math.ceil(len(text)/max_length)
 #     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
@@ -61,18 +60,20 @@ def read_input(path, max_length=5000):
         if sentence2.find("[E1]") !=-1: # assert every sentence are annotated
             sentences.append(sentence2)
         
-        e1 = result[1]
-        e2 = result[2]
-        for sent in paragraphs:
-            if e1 in sent and e2 in sent:
-                s1 = sent
-                s1 = s1.replace(e1, '[E1] ' + e1 + ' [/E1]', 1).replace(e2, '[E2] '+e2+' [/E2]', 1)
-                if s1.find("E1")!=-1 and s1.find("E2")!=-1:
-                    sentences.append(s1)
-                s2 = sent
-                s2 = s2.replace(e1, '[E2] ' + e1 + ' [/E2]', 1).replace(e2, '[E1] '+e2+' [/E1]', 1)
-                if s2.find("E1")!=-1 and s2.find("E2")!=-1:
-                    sentences.append(s2)
+        e1 = result[1].strip()
+        e2 = result[2].strip()
+        entities.append(e1)
+        entities.append(e2)
+        
+    for e1 in entities:
+        for e2 in entities:
+            if e1 != e2:
+                for sent in paragraphs:
+                    if e1 in sent and e2 in sent:
+                        s = sent
+                        s = s.replace(e1, '[E1] ' + e1 + ' [/E1]', 1).replace(e2, '[E2] '+e2+' [/E2]', 1)
+                        if s.find("E1")!=-1 and s.find("E2")!=-1:
+                            sentences.append(s)
                 
     print("\nFinished annotating!")        
     print("Number of sentences with annotation: %d" % len(sentences))
