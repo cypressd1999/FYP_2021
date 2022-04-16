@@ -41,7 +41,7 @@ def read_input(path, max_length=5000):
 
     for text_chunk in tqdm(text_chunks, total=len(text)):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
-    print(D)
+    
     sentences = []
     for result in D:
         sentence = result[0][0]
@@ -52,8 +52,14 @@ def read_input(path, max_length=5000):
         if sentence.find("[E1]") !=-1: # assert every sentence are annotated
             sentences.append(sentence)
         
-#         for sent in paragraphs:
-#             if p1 in sent and p2 in sent:
+        e1 = result[1]
+        e2 = result[2]
+        for sent in paragraphs:
+            if e1 in sent and e2 in sent:
+                s = sent
+                s = s.replace(e1, '[E1]' + e1 + '[/E1]', 1).replace(e2, '[E2]'+e2+'[/E2]', 1)
+                if s.find("E1")!=-1 and s.find("E2")!=-1:
+                    sentences.append(s)
                 
     print("\nFinished annotating!")        
     print("Number of sentences with annotation: %d" % len(sentences))
