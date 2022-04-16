@@ -27,6 +27,9 @@ def read_input(path, max_length=5000):
 
 #     text = process_textlines(text)
     print("Number of paragraph: %d" % len(text))
+    paragraphs = []
+    for line in text:
+        paragraphs += line.split(".")
 #     num_chunks = math.ceil(len(text)/max_length)
 #     print("Splitting into %d max length chunks of size %d" % (num_chunks, max_length))
 #     text_chunks = (text[i*max_length:(i*max_length + max_length)] for i in range(num_chunks))
@@ -38,7 +41,7 @@ def read_input(path, max_length=5000):
 
     for text_chunk in tqdm(text_chunks, total=len(text)):
         D.extend(create_pretraining_corpus(text_chunk, nlp, window_size=40))
-    
+    print(D)
     sentences = []
     for result in D:
         sentence = result[0][0]
@@ -48,10 +51,12 @@ def read_input(path, max_length=5000):
         sentence = " ".join(sentence)
         if sentence.find("[E1]") !=-1: # assert every sentence are annotated
             sentences.append(sentence)
+        
+#         for sent in paragraphs:
+#             if p1 in sent and p2 in sent:
+                
     print("\nFinished annotating!")        
     print("Number of sentences with annotation: %d" % len(sentences))
-#     print("Sentences:")
-#     print(sentences)
     print("")
     return sentences
   
