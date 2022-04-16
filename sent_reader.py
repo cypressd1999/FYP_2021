@@ -51,10 +51,15 @@ def read_input(path, max_length=5000):
         sentence = result[0][0]
         p1 = result[0][1]
         p2 = result[0][2]
-        sentence = sentence[:p1[0]] + ['[E1] '] + sentence[p1[0]:p1[1]] + [' [/E1]'] + sentence[p1[1]:p2[0]] + ['[E2] '] + sentence[p2[0]:p2[1]] + [' [/E2]'] + sentence[p2[1]:] 
-        sentence = " ".join(sentence)
-        if sentence.find("[E1]") !=-1: # assert every sentence are annotated
-            sentences.append(sentence)
+        sentence1 = sentence[:p1[0]] + ['[E1] '] + sentence[p1[0]:p1[1]] + [' [/E1]'] + sentence[p1[1]:p2[0]] + ['[E2] '] + sentence[p2[0]:p2[1]] + [' [/E2]'] + sentence[p2[1]:] 
+        sentence1 = " ".join(sentence1)
+        if sentence1.find("[E1]") !=-1: # assert every sentence are annotated
+            sentences.append(sentence1)
+        
+        sentence2 = sentence[:p1[0]] + ['[E2] '] + sentence[p1[0]:p1[1]] + [' [/E2]'] + sentence[p1[1]:p2[0]] + ['[E1] '] + sentence[p2[0]:p2[1]] + [' [/E1]'] + sentence[p2[1]:] 
+        sentence2 = " ".join(sentence2)
+        if sentence2.find("[E1]") !=-1: # assert every sentence are annotated
+            sentences.append(sentence2)
         
         e1 = result[1]
         e2 = result[2]
