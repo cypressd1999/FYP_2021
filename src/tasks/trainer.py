@@ -116,24 +116,20 @@ def train_and_fit(args):
     
     start_epoch, best_pred, amp_checkpoint = load_state(net, optimizer, scheduler, args, load_best=False)  
     
-    continued_training = False
-    
     if (args.fp16) and (amp is not None):
         logger.info("Using fp16...")
         net, optimizer = amp.initialize(net, optimizer, opt_level='O2')
         if amp_checkpoint is not None:
             amp.load_state_dict(amp_checkpoint)
-            continued_training = True
         scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[2,4,6,8,12,15,18,20,22,\
                                                                           24,26,30], gamma=0.8)
     
     losses_per_epoch, accuracy_per_epoch, test_f1_per_epoch = load_results(args.model_no)
     
-    test_acc_per_epoch = []
-    # This list is for output the testing accuracy by relations. 
+    # These two lists are for output the testing accuracy by relations per epoch. 
     # Currently it doesn't support continued training from loaded checkpoints. 
-    if not continued_training:
-      test_acc_by_cat_per_epoch = []
+    test_acc_per_epoch = []
+    test_acc_by_cat_per_epoch = []
     
     logger.info("Starting training process...")
     pad_id = tokenizer.pad_token_id
@@ -195,15 +191,13 @@ def train_and_fit(args):
         
         # add for print testing accuracy and acc_by_category
         test_acc_per_epoch.append(results['accuracy'])
-        if not continued_training:
-          test_acc_by_cat_per_epoch.append(results['accuracy_by_category'])
+        test_acc_by_cat_per_epoch.append(results['accuracy_by_category'])
         
         print("Epoch finished, took %.2f seconds." % (time.time() - start_time))
         print("Losses at Epoch %d: %.7f" % (epoch + 1, losses_per_epoch[-1]))
         print("Train accuracy at Epoch %d: %.7f" % (epoch + 1, accuracy_per_epoch[-1]))
         print("Test f1 at Epoch %d: %.7f" % (epoch + 1, test_f1_per_epoch[-1]))
-        if not continued_training:
-          print("Test accuracy at Epoch %d: %.7f" % (epoch + 1, test_acc_per_epoch[-1])) # add for testing accuracy
+        print("Test accuracy at Epoch %d: %.7f" % (epoch + 1, test_acc_per_epoch[-1])) # add for testing accuracy
         
         if accuracy_per_epoch[-1] > best_pred:
             best_pred = accuracy_per_epoch[-1]
@@ -238,21 +232,21 @@ def train_and_fit(args):
     print(accuracy_per_epoch)
     print("Test Accuracy = ", end = "")
     print(test_acc_per_epoch)
-    if not continued_training:
-      print("Test Accuracy by Category: ")
-      rm = load_pickle("relations.pkl")
-      for label in test_acc_by_cat_per_epoch[-1].keys():
-        relation = rm.idx2rel[int(label)].strip()
-        relation = relation.replace("(e1,e2)", "")
-        print("   ",end = "")
-        print(relation, end = ": ")
-        print(test_acc_by_cat_per_epoch[-1][label])
 
-        # for presentation only
-        print()
-        print(test_acc_by_cat_per_epoch)
-        print()
-        # for presentation
+    print("Test Accuracy by Category: ")
+    rm = load_pickle("relations.pkl")
+    for label in test_acc_by_cat_per_epoch[-1].keys():
+      relation = rm.idx2rel[int(label)].strip()
+      relation = relation.replace("(e1,e2)", "")
+      print("   ",end = "")
+      print(relation, end = ": ")
+      print(test_acc_by_cat_per_epoch[-1][label])
+
+      # for presentation only
+      print()
+      print(test_acc_by_cat_per_epoch)
+      print()
+      # for presentation
     
     print("\n--------------------------------------------------------------\n")
     
