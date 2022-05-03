@@ -23,6 +23,8 @@ Example:
 ```bash
 Type input sentence ('quit' or 'exit' to terminate):
 [E1] Ajay [/E1] gained entrepreneurial experience from a young age as part of a multi-generational family business named [E2] Ashlin BPG Marketing [/E2]. Ashlin supplies high-end leather accessories to the e-commerce and promotional product industries.
+
+Predicted:  Person-Experience(e1,e2) 
 ```
 
 To infer a full paragraph without annotating, set --from-file=1 and the sent_reader.py will read the default data file input.txt and output a graph of relations. Spacy NLP is used to extract entities for auto-annotation.
@@ -37,7 +39,7 @@ Ajay gained entrepreneurial experience from a young age as part of a multi-gener
 ```
 
 Output:
-```python
+```bash
 Relations extracted:
 [(' Ajay ', ' Ashlin BPG Marketing ', 'Person-Experience(e1,e2)'), (' Ashlin BPG Marketing ', ' Ajay ', 'parent-subsidiary(e1,e2)'), (' Ajay ', ' Ashlin ', 'Person-Experience(e1,e2)'), (' Ashlin ', ' Ajay ', 'parent-subsidiary(e1,e2)'), (' Ashlin BPG Marketing ', ' Ashlin ', 'parent-subsidiary(e1,e2)'), (' Ashlin ', ' Ashlin BPG Marketing ', 'parent-subsidiary(e1,e2)'), ('Ajay', 'Ashlin BPG Marketing', 'Person-Experience(e1,e2)'), ('Ajay', 'Ashlin', 'Person-Experience(e1,e2)'), ('Ashlin BPG Marketing', 'Ajay', 'parent-subsidiary(e1,e2)'), ('Ashlin', 'Ajay', 'parent-subsidiary(e1,e2)')]
 ```
