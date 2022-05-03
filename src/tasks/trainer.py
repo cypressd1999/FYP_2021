@@ -230,23 +230,24 @@ def train_and_fit(args):
     print(losses_per_epoch)
     print("Train Accuracy = ", end = "")
     print(accuracy_per_epoch)
-    print("Test Accuracy = ", end = "")
-    print(test_acc_per_epoch)
+    
+    if len(test_acc_per_epoch) != 0:
+      print("Test Accuracy = ", end = "")
+      print(test_acc_per_epoch)
+      print("Test Accuracy by Category: ")
+      rm = load_pickle("relations.pkl")
+      for label in test_acc_by_cat_per_epoch[-1].keys():
+        relation = rm.idx2rel[int(label)].strip()
+        relation = relation.replace("(e1,e2)", "")
+        print("   ",end = "")
+        print(relation, end = ": ")
+        print(test_acc_by_cat_per_epoch[-1][label])
 
-    print("Test Accuracy by Category: ")
-    rm = load_pickle("relations.pkl")
-    for label in test_acc_by_cat_per_epoch[-1].keys():
-      relation = rm.idx2rel[int(label)].strip()
-      relation = relation.replace("(e1,e2)", "")
-      print("   ",end = "")
-      print(relation, end = ": ")
-      print(test_acc_by_cat_per_epoch[-1][label])
-
-      # for presentation only
-      print()
-      print(test_acc_by_cat_per_epoch)
-      print()
-      # for presentation
+        # for presentation only
+        print()
+        print(test_acc_by_cat_per_epoch)
+        print()
+        # for presentation
     
     print("\n--------------------------------------------------------------\n")
     
