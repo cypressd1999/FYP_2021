@@ -126,10 +126,11 @@ def train_and_fit(args):
     
     losses_per_epoch, accuracy_per_epoch, test_f1_per_epoch = load_results(args.model_no)
     
-    # This two lists are for output the testing accuracy by category. 
+    # The two lists are for output the testing accuracy by category. 
     # Currently it doesn't support continued training from loaded checkpoints. 
-    test_acc_per_epoch = []
-    test_acc_by_cat_per_epoch = []
+    if amp_checkpoint is None:
+      test_acc_per_epoch = []
+      test_acc_by_cat_per_epoch = []
     
     logger.info("Starting training process...")
     pad_id = tokenizer.pad_token_id
@@ -197,7 +198,8 @@ def train_and_fit(args):
         print("Losses at Epoch %d: %.7f" % (epoch + 1, losses_per_epoch[-1]))
         print("Train accuracy at Epoch %d: %.7f" % (epoch + 1, accuracy_per_epoch[-1]))
         print("Test f1 at Epoch %d: %.7f" % (epoch + 1, test_f1_per_epoch[-1]))
-        print("Test accuracy at Epoch %d: %.7f" % (epoch + 1, test_acc_per_epoch[-1])) # add for testing accuracy
+        if amp_checkpoint is None:
+          print("Test accuracy at Epoch %d: %.7f" % (epoch + 1, test_acc_per_epoch[-1])) # add for testing accuracy
         
         if accuracy_per_epoch[-1] > best_pred:
             best_pred = accuracy_per_epoch[-1]
@@ -232,20 +234,21 @@ def train_and_fit(args):
     print(accuracy_per_epoch)
     print("Test Accuracy = ", end = "")
     print(test_acc_per_epoch)
-    print("Test Accuracy by Category: ")
-    rm = load_pickle("relations.pkl")
-    for label in test_acc_by_cat_per_epoch[-1].keys():
-      relation = rm.idx2rel[int(label)].strip()
-      relation = relation.replace("(e1,e2)", "")
-      print("   ",end = "")
-      print(relation, end = ": ")
-      print(test_acc_by_cat_per_epoch[-1][label])
-      
-    # for presentation only
-    print()
-    print(test_acc_by_cat_per_epoch)
-    print()
-    # for presentation
+    if amp_checkpoint is None:
+      print("Test Accuracy by Category: ")
+      rm = load_pickle("relations.pkl")
+      for label in test_acc_by_cat_per_epoch[-1].keys():
+        relation = rm.idx2rel[int(label)].strip()
+        relation = relation.replace("(e1,e2)", "")
+        print("   ",end = "")
+        print(relation, end = ": ")
+        print(test_acc_by_cat_per_epoch[-1][label])
+
+        # for presentation only
+        print()
+        print(test_acc_by_cat_per_epoch)
+        print()
+        # for presentation
     
     print("\n--------------------------------------------------------------\n")
     
