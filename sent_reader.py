@@ -16,6 +16,7 @@ import logging
 # import preprocessing_funcs from src folder
 from src.preprocessing_funcs import process_textlines
 from src.preprocessing_funcs import create_pretraining_corpus
+from argparse import ArgumentParser
 
 def read_input(path, max_length=5000):
     '''
@@ -84,5 +85,7 @@ def read_input(path, max_length=5000):
     return sentences
   
 if __name__ == '__main__':
-    path = 'input.txt'
-    read_input(path)
+    parser = ArgumentParser()
+    parser.add_argument("--data", type=str, default="./input.txt", help="input file path for plain text input")
+    args = parser.parse_args()
+    read_input(args.data)
