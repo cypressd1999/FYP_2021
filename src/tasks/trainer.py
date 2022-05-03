@@ -126,10 +126,10 @@ def train_and_fit(args):
     
     losses_per_epoch, accuracy_per_epoch, test_f1_per_epoch = load_results(args.model_no)
     
-    # The two lists are for output the testing accuracy by category. 
+    test_acc_per_epoch = []
+    # This list is for output the testing accuracy by relations. 
     # Currently it doesn't support continued training from loaded checkpoints. 
     if amp_checkpoint is None:
-      test_acc_per_epoch = []
       test_acc_by_cat_per_epoch = []
     
     logger.info("Starting training process...")
@@ -192,7 +192,8 @@ def train_and_fit(args):
         
         # add for print testing accuracy and acc_by_category
         test_acc_per_epoch.append(results['accuracy'])
-        test_acc_by_cat_per_epoch.append(results['accuracy_by_category'])
+        if amp_checkpoint is None:
+          test_acc_by_cat_per_epoch.append(results['accuracy_by_category'])
         
         print("Epoch finished, took %.2f seconds." % (time.time() - start_time))
         print("Losses at Epoch %d: %.7f" % (epoch + 1, losses_per_epoch[-1]))
