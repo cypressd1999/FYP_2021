@@ -126,7 +126,8 @@ def train_and_fit(args):
     
     losses_per_epoch, accuracy_per_epoch, test_f1_per_epoch = load_results(args.model_no)
     
-    # don't support half traning!
+    # This two lists are for output the testing accuracy by category. 
+    # Currently it doesn't support continued training from loaded checkpoints. 
     test_acc_per_epoch = []
     test_acc_by_cat_per_epoch = []
     
